@@ -12,12 +12,45 @@ Algorithm:
 5.	Call the max_of_four function with the input integers and store the result in the greater variable
  
 Program:
-//type your code here
+~~~
+#include <stdio.h>
+
+int max_of_four(int n1, int n2, int n3, int n4) {
+    int greater;
+
+    if (n1 >= n2 && n1 >= n3 && n1 >= n4)
+        greater = n1;
+    else if (n2 >= n1 && n2 >= n3 && n2 >= n4)
+        greater = n2;
+    else if (n3 >= n1 && n3 >= n2 && n3 >= n4)
+        greater = n3;
+    else
+        greater = n4;
+
+    return greater;
+}
+
+int main() {
+    int n1, n2, n3, n4, greater;
+
+    printf("Enter four integers: ");
+    scanf("%d %d %d %d", &n1, &n2, &n3, &n4);
+
+    greater = max_of_four(n1, n2, n3, n4);
+
+    printf("Greatest number = %d\n", greater);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
+
+<img width="612" height="172" alt="Screenshot 2026-09-09 214657" src="https://github.com/user-attachments/assets/2fee1904-6bb8-4125-9ab6-30901a44ab0b" />
+
 
 Result:
+
 Thus, the program  that create a function to find the greatest number is verified successfully.
 
 
@@ -36,12 +69,51 @@ Algorithm:
 7.	Call the calculate_the_max function with input values.
  
 Program:
-//type your code here
+~~~
+#include <stdio.h>
+
+void calculate_the_max(int n, int k) {
+    int i, j;
+    int a = 0, o = 0, x = 0;
+
+    for (i = 1; i <= n; i++) {
+        for (j = i + 1; j <= n; j++) {
+            if ((i & j) < k && (i & j) > a)
+                a = i & j;
+
+            if ((i | j) < k && (i | j) > o)
+                o = i | j;
+
+            if ((i ^ j) < k && (i ^ j) > x)
+                x = i ^ j;
+        }
+    }
+
+    printf("Maximum AND = %d\n", a);
+    printf("Maximum OR = %d\n", o);
+    printf("Maximum XOR = %d\n", x);
+}
+
+int main() {
+    int n, k;
+
+    printf("Enter the values of n and k: ");
+    scanf("%d %d", &n, &k);
+
+    calculate_the_max(n, k);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
+
+
+<img width="550" height="230" alt="image" src="https://github.com/user-attachments/assets/44bd09a6-f8dd-49d0-9a7a-a84714f2faf2" />
+
 
 Result:
+
 Thus, the program to print the maximum values for the AND, OR and XOR comparisons
 is verified successfully.
 
@@ -59,13 +131,62 @@ Algorithm:
 5.	Use a for loop to iterate over the queries.
  
 Program:
-//type your code here
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int noshel, noque;
+    int **shelarr;
+    int *nobookarr;
+    int k, c = 0;
+    int i, j;
+
+    printf("Enter the number of shelves and queries: ");
+    scanf("%d %d", &noshel, &noque);
+
+    shelarr = (int **)malloc(noshel * sizeof(int *));
+    nobookarr = (int *)calloc(noshel, sizeof(int));
+
+    for (i = 0; i < noshel; i++)
+        shelarr[i] = NULL;
+
+    for (i = 0; i < noque; i++) {
+        int type, x, y;
+
+        scanf("%d %d %d", &type, &x, &y);
+
+        if (type == 1) {
+            k = nobookarr[x];
+
+            shelarr[x] = (int *)realloc(shelarr[x], (k + 1) * sizeof(int));
+            shelarr[x][k] = y;
+
+            nobookarr[x]++;
+        } else if (type == 2) {
+            printf("%d\n", shelarr[x][y]);
+        } else if (type == 3) {
+            printf("%d\n", nobookarr[x]);
+        }
+    }
+
+    for (i = 0; i < noshel; i++)
+        free(shelarr[i]);
+
+    free(shelarr);
+    free(nobookarr);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
+
+<img width="730" height="237" alt="image" src="https://github.com/user-attachments/assets/a1f8dc61-918b-427a-851a-d6223aaa0c86" />
 
 
 Result:
+
 Thus, the program to write the logic for the requests is verified successfully.
 
 
@@ -86,15 +207,36 @@ Algorithm:
 
 
 Program:
-//type your code here
+~~~
+#include <stdio.h>
+
+int main() {
+    int n, i, sum = 0;
+    int a[100];
+
+    printf("Enter the number of integers: ");
+    scanf("%d", &n);
+
+    printf("Enter the integers:\n");
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+        sum = sum + a[i];
+    }
+
+    printf("Sum of the integers = %d\n", sum);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
 
- 
+<img width="620" height="327" alt="image" src="https://github.com/user-attachments/assets/d69a550e-8317-43eb-903e-0d7696c309f0" />
 
 
 Result:
+
 Thus, the program prints the sum of the integers in the array is verified successfully.
 
 
@@ -120,11 +262,39 @@ o	If a character is not a space, it may belong to a word. If it's the first non-
 
 
 Program:
-//type your code here
+~~~
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char sentence[200];
+    int i = 0;
+    int count = 0;
+    int inWord = 0;
+
+    printf("Enter a sentence: ");
+    fgets(sentence, sizeof(sentence), stdin);
+
+    while (sentence[i] != '\0') {
+        if (isspace(sentence[i])) {
+            inWord = 0;
+        } else if (inWord == 0) {
+            count++;
+            inWord = 1;
+        }
+
+        i++;
+    }
+
+    printf("Number of words = %d\n", count);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
 
+<img width="747" height="217" alt="image" src="https://github.com/user-attachments/assets/b3d7da01-0a9c-45a2-a534-d37a0ecbe49d" />
 
 
 Result:
